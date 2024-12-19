@@ -59,7 +59,9 @@ def main():
 
     if st.button("שאלות לדוגמה"):
         show_paragraph()
-
+    if st.button("Close"):
+        hide_paragraph()
+        
     if st.session_state.show_paragraph:
         st.markdown("""
             **שאלות לדוגמה:**
@@ -87,7 +89,6 @@ def main():
         unsafe_allow_html=True,
     )
     
-        if st.button("Close"):
-            hide_paragraph()
+
 if __name__ == "__main__":
     main()
