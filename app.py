@@ -30,9 +30,9 @@ def run_flow(message: str) -> dict:
 
 def main():
     st.title("IBOT GPT")
-    message = st.text_area("Message", placeholder="מה תרצה לדעת ?")
+    message = st.text_area("הודעה", placeholder="מה תרצה לדעת ?")
 
-    if st.button("Run flow"):
+    if st.button("תשלח"):
         if not message.strip():
             st.error("לא התקבלה הודעה, תכתוב משהו...")
             return
