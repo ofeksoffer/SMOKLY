@@ -64,14 +64,29 @@ def main():
         st.markdown("""
             **שאלות לדוגמה:**
             מידע על מוצרים
-            לדוגמה:
-            ספר לי על becalm או מה היתרונות של שימוש ב becalm
-
-            סיוע בביעיות ספיציפיות
-            לדוגמה:
-            איזה מוצר יכול לעזור לי עם כאבי ראש?                   
-                     
+            יתרונות
+            רכיבים
+            תופעות לוואי 
+            מידע על רכיבים ויתרונותיהם
         """)
+
+            # Add a right-aligned close button using custom HTML and CSS
+    st.markdown(
+        """
+        <div style="display: flex; justify-content: flex-end;">
+            <form action="">
+                <button style="background-color: #f63366; color: white; border: none; padding: 8px 16px; 
+                               text-align: center; text-decoration: none; display: inline-block; 
+                               font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 4px;"
+                        onclick="parent.window.location.reload()">
+                    Close Paragraph
+                </button>
+            </form>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    
         if st.button("Close"):
             hide_paragraph()
 if __name__ == "__main__":
