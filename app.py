@@ -35,20 +35,6 @@ def main():
     # User message input
     message = st.text_area("הודעה", placeholder="מה תרצה לדעת?")
 
-    # Handle sending the message
-    if st.button("תשלח"):
-        if not message.strip():
-            st.error("לא התקבלה הודעה, תכתוב משהו...")
-            return
-        try:
-            with st.spinner("השאלה בבדיקה..."):
-                response = run_flow(message)
-            # Extract the text from the response
-            text_response = response["outputs"][0]["outputs"][0]["results"]["message"]["text"]
-            st.markdown(text_response)
-        except Exception as e:
-            st.error(f"שגיאה: {e}")
-
     # Example questions section
     if "show_paragraph" not in st.session_state:
         st.session_state.show_paragraph = False
@@ -59,8 +45,19 @@ def main():
         if st.button("שאלות לדוגמה"):
             st.session_state.show_paragraph = not st.session_state.show_paragraph
     with col2:
-        if st.button("סגור"):
-            st.session_state.show_paragraph = False
+       # Handle sending the message
+        if st.button("תשלח"):
+            if not message.strip():
+                st.error("לא התקבלה הודעה, תכתוב משהו...")
+                return
+            try:
+                with st.spinner("השאלה בבדיקה..."):
+                    response = run_flow(message)
+                # Extract the text from the response
+                text_response = response["outputs"][0]["outputs"][0]["results"]["message"]["text"]
+                st.markdown(text_response)
+            except Exception as e:
+                st.error(f"שגיאה: {e}")
 
     # Render example questions if toggled on
     if st.session_state.show_paragraph:
