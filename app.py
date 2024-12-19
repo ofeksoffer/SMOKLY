@@ -36,7 +36,7 @@ def main():
     message = st.text_area("הודעה", placeholder="מה תרצה לדעת?")
 
     # Handle sending the message
-    if st.button("תשלח"):
+    if st.button("שליחה"):
         if not message.strip():
             st.error("לא התקבלה הודעה, תכתוב משהו...")
             return
