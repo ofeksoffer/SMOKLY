@@ -36,7 +36,7 @@ def main():
     message = st.text_area("הודעה", placeholder="מה תרצה לדעת?")
 
     # Handle sending the message
-    if st.button("שליחה"):
+    if st.button("תשלח"):
         if not message.strip():
             st.error("לא התקבלה הודעה, תכתוב משהו...")
             return
@@ -53,12 +53,14 @@ def main():
     if "show_paragraph" not in st.session_state:
         st.session_state.show_paragraph = False
 
-    col1, col2 = st.columns([4, 1])  # Adjust column width ratios
-
-    # Show/Hide buttons
+    # Place buttons in the same row using st.columns
+    col1, col2 = st.columns([6, 1])  # Adjust column ratios to control alignment
     with col1:
         if st.button("שאלות לדוגמה"):
             st.session_state.show_paragraph = not st.session_state.show_paragraph
+    with col2:
+        if st.button("סגור"):
+            st.session_state.show_paragraph = False
 
     # Render example questions if toggled on
     if st.session_state.show_paragraph:
@@ -70,11 +72,6 @@ def main():
             - תופעות לוואי  
             - מידע על רכיבים ויתרונותיהם  
         """)
-
-    # Optional: Add right-aligned custom button
-    with col2:
-        if st.button("סגור"):
-            st.session_state.show_paragraph = False
 
 if __name__ == "__main__":
     main()
