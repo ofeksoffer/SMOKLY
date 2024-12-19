@@ -29,15 +29,15 @@ def run_flow(message: str) -> dict:
     return response.json()
 
 def main():
-    st.title("Chat Interface")
-    message = st.text_area("Message", placeholder="Ask something...")
+    st.title("IBOT GPT")
+    message = st.text_area("Message", placeholder="מה תרצה לדעת ?")
 
     if st.button("Run flow"):
         if not message.strip():
-            st.error("please enter a message")
+            st.error("לא התקבלה הודעה, תכתוב משהו...")
             return
         try:
-            with st.spinner("Running flow..."):
+            with st.spinner("השאלה בבדיקה..."):
                 response = run_flow(message)
             # Extract the text from the response
             text_response = response["outputs"][0]["outputs"][0]["results"]["message"]["text"]
