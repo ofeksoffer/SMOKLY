@@ -8,8 +8,8 @@ load_dotenv()
 BASE_API_URL = "https://api.langflow.astra.datastax.com"
 LANGFLOW_ID = "431afd17-aae3-4cc2-ac6d-bedcad04deaa"
 FLOW_ID = "aee5ffd9-4433-4490-bff0-3d01ef7e049b"
-APPLICATION_TOKEN = APP_TOKEN    
-ENDPOINT = END_POINT
+APPLICATION_TOKEN = st.secrets("APP_TOKEN")    
+ENDPOINT = st.secrets("END_POINT")
 
 def run_flow(message: str) -> dict:
     api_url = f"{BASE_API_URL}/lf/{LANGFLOW_ID}/api/v1/run/{ENDPOINT}"
