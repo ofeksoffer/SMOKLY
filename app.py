@@ -40,11 +40,11 @@ def main():
         st.session_state.show_paragraph = False
 
     # Place buttons in the same row using st.columns
-    col1, col2 = st.columns([1, 1])  # Adjust column ratios to control alignment
-    with col1:
+    col1, col2 = st.columns([1, 6])  # Adjust column ratios to control alignment
+    with col2:
         if st.button("שאלות לדוגמה"):
             st.session_state.show_paragraph = not st.session_state.show_paragraph
-    with col2:
+    with col1:
        # Handle sending the message
         if st.button("תשלח"):
             if not message.strip():
