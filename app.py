@@ -8,7 +8,7 @@ load_dotenv()
 BASE_API_URL = "https://api.langflow.astra.datastax.com"
 LANGFLOW_ID = "431afd17-aae3-4cc2-ac6d-bedcad04deaa"
 FLOW_ID = "aee5ffd9-4433-4490-bff0-3d01ef7e049b"
-APPLICATION_TOKEN = st.secrets["APP_TOKEN"]    
+APPLICATION_TOKEN = st.secrets["APP_TOKEN"]
 ENDPOINT = st.secrets["END_POINT"]
 
 def run_flow(message: str) -> dict:
@@ -30,8 +30,12 @@ def run_flow(message: str) -> dict:
 
 def main():
     st.title("IBOT GPT")
-    message = st.text_area("הודעה", placeholder="מה תרצה לדעת ?")
+    st.subheader("התייעץ עם הבוט שלנו וקבל תשובות מהירות!")
 
+    # User message input
+    message = st.text_area("הודעה", placeholder="מה תרצה לדעת?")
+
+    # Handle sending the message
     if st.button("תשלח"):
         if not message.strip():
             st.error("לא התקבלה הודעה, תכתוב משהו...")
@@ -43,52 +47,34 @@ def main():
             text_response = response["outputs"][0]["outputs"][0]["results"]["message"]["text"]
             st.markdown(text_response)
         except Exception as e:
-            st.error(str(e))
-            
-    # Initialize session state to track if the paragraph is shown
+            st.error(f"שגיאה: {e}")
+
+    # Example questions section
     if "show_paragraph" not in st.session_state:
         st.session_state.show_paragraph = False
 
-    # Function to show the paragraph
-    def show_paragraph():
-        st.session_state.show_paragraph = True
+    col1, col2 = st.columns([4, 1])  # Adjust column width ratios
 
-    # Function to hide the paragraph
-    def hide_paragraph():
-        st.session_state.show_paragraph = False
+    # Show/Hide buttons
+    with col1:
+        if st.button("שאלות לדוגמה"):
+            st.session_state.show_paragraph = not st.session_state.show_paragraph
 
-    if st.button("שאלות לדוגמה"):
-        show_paragraph()
-    if st.button("Close"):
-        hide_paragraph()
-        
+    # Render example questions if toggled on
     if st.session_state.show_paragraph:
         st.markdown("""
             **שאלות לדוגמה:**
-            מידע על מוצרים
-            יתרונות
-            רכיבים
-            תופעות לוואי 
-            מידע על רכיבים ויתרונותיהם
+            - מידע על מוצרים  
+            - יתרונות  
+            - רכיבים  
+            - תופעות לוואי  
+            - מידע על רכיבים ויתרונותיהם  
         """)
 
-            # Add a right-aligned close button using custom HTML and CSS
-    st.markdown(
-        """
-        <div style="display: flex; justify-content: flex-end;">
-            <form action="">
-                <button style="background-color: #f63366; color: white; border: none; padding: 8px 16px; 
-                               text-align: center; text-decoration: none; display: inline-block; 
-                               font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 4px;"
-                        onclick="parent.window.location.reload()">
-                    Close Paragraph
-                </button>
-            </form>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-    
+    # Optional: Add right-aligned custom button
+    with col2:
+        if st.button("סגור"):
+            st.session_state.show_paragraph = False
 
 if __name__ == "__main__":
     main()
