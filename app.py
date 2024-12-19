@@ -44,6 +44,35 @@ def main():
             st.markdown(text_response)
         except Exception as e:
             st.error(str(e))
+            
+    # Initialize session state to track if the paragraph is shown
+    if "show_paragraph" not in st.session_state:
+        st.session_state.show_paragraph = False
 
+    # Function to show the paragraph
+    def show_paragraph():
+        st.session_state.show_paragraph = True
+
+    # Function to hide the paragraph
+    def hide_paragraph():
+        st.session_state.show_paragraph = False
+
+    if st.button("שאלות לדוגמה"):
+        show_paragraph()
+
+    if st.session_state.show_paragraph:
+        st.markdown("""
+            **שאלות לדוגמה:**
+            מידע על מוצרים
+            לדוגמה:
+            ספר לי על becalm או מה היתרונות של שימוש ב becalm
+
+            סיוע בביעיות ספיציפיות
+            לדוגמה:
+            איזה מוצר יכול לעזור לי עם כאבי ראש?                   
+                     
+        """)
+        if st.button("Close"):
+            hide_paragraph()
 if __name__ == "__main__":
     main()
